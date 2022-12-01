@@ -47,17 +47,27 @@ export const fetchOneProduct = (productId) => {
 export const addProduct = (product) => {
     let url = API_URL + "/products";
     return (dispatch) => {
+        dispatch(uiActions.setIsLoading(true))
         fetch(url, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(product)
         }).then((response) => {
             if (!response.ok) {
-                throw Error("Couldn't add the product product with id " + product.id)
+                throw Error("Couldn't add the product product with product name: " + product.productName)
             }
             return response.json()
-        }).then((result) => dispatch(productListActions.addProduct(result)))
-            .catch((err) => productListActions.addProduct({error: err}))
+        }).then((result) => {
+            dispatch(productListActions.addProduct(result))
+            dispatch(uiActions.setIsLoading(false))
+            alertify.success(product.productName + " added successfully.")
+
+        }).catch((err) => {
+            dispatch(uiActions.setError(err))
+            dispatch(uiActions.setIsLoading(false))
+            alertify.error(err.message)
+
+        })
     }
 }
 
@@ -79,7 +89,7 @@ export const updateProduct = (product) => {
                 }).then((result) => {
                         dispatch(productActions.updateProduct(result))
                         dispatch(uiActions.setIsLoading(false))
-                        alertify.success(product.productName +" updated successfully.")
+                        alertify.success(product.productName + " updated successfully.")
                     }
                 ).catch((err) => {
                     dispatch(uiActions.setError(err))

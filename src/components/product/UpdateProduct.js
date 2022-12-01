@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Form, FormGroup, Input, Label, Spinner} from "reactstrap";
+import {Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchOneProduct, updateProduct} from "../../redux/productActionsThunk";
 import {fetchCategories, fetchOneCategory} from "../../redux/categoryActionThunk";
@@ -13,7 +13,6 @@ const UpdateProduct = () => {
     const product = useSelector((state) => state.productStore.product)
     const currentCategory = useSelector((state) => state.categoryStore.category)
     const isLoading = useSelector((state) => state.uiStore.isLoading)
-    const errors = useSelector((state) => state.uiStore.errors)
 
     const [name, setName] = useState()
     const [quantity, setQuantity] = useState()

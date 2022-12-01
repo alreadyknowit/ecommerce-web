@@ -30,6 +30,12 @@ const CreateProduct = () => {
         dispatch(fetchCategories())
     }, [dispatch])
 
+    useEffect(()=>{
+        if(categories.length>0){
+            setCategoryId(Object.values(categories)[0].id)
+        }
+    },[categories]);
+
     return (
         <div>
             <Form onSubmit={handleSubmit}>
