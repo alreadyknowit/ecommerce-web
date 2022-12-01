@@ -2,6 +2,7 @@ import {productListActions} from "./productListSlice";
 import {productActions} from "./prodcutSlice";
 import {API_URL} from "../const/url";
 import {uiActions} from "./uiSlice";
+import alertify from "alertifyjs";
 
 export const fetchProducts = (categoryId) => {
     let url = API_URL + "/products";
@@ -72,16 +73,18 @@ export const updateProduct = (product) => {
                     body: JSON.stringify(product)
                 }).then((response) => {
                     if (!response.ok) {
-                        throw Error("Couldn't update the product with id " + product.id)
+                        throw Error("Couldn't update the product: " + product.productName)
                     }
                     return response.json();
                 }).then((result) => {
                         dispatch(productActions.updateProduct(result))
                         dispatch(uiActions.setIsLoading(false))
+                        alertify.success(product.productName +" updated successfully.")
                     }
                 ).catch((err) => {
                     dispatch(uiActions.setError(err))
                     dispatch(uiActions.setIsLoading(false))
+                    alertify.error(err.message)
                 })
             , 1000)
 

@@ -5,7 +5,6 @@ import {fetchOneProduct, updateProduct} from "../../redux/productActionsThunk";
 import {fetchCategories, fetchOneCategory} from "../../redux/categoryActionThunk";
 import {useParams} from "react-router-dom";
 import {PageSpinner, ButtonSpinner} from "../spinner/Spinner";
-
 const UpdateProduct = () => {
     let {id} = useParams()
     const dispatch = useDispatch()
@@ -22,7 +21,6 @@ const UpdateProduct = () => {
     const [categoryId, setCategoryId] = useState()
     const [unitsInStock, setUnitsInStock] = useState()
 
-console.log('errors',errors)
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -140,9 +138,6 @@ console.log('errors',errors)
                     </Button>
                 </Form>
 
-                {
-                    errors.map((error)=><p>{error.message}</p>)
-                }
             </div>
 
         )
