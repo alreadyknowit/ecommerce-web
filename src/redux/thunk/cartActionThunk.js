@@ -79,7 +79,6 @@ export const removeFromCart = (cartItem) => {
             if (!response.ok) {
                 throw Error('Something went wrong -- DELETE')
             }
-            return response.json()
 
         }).then(()=>{
             dispatch(cartActions.removeFromCart(JSON.parse(JSON.stringify(cartItem))))
