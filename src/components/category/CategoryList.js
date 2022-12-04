@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Badge, ListGroup, ListGroupItem} from "reactstrap";
-import {categoryActions} from "../../redux/categorySlice";
-import {fetchCategories} from "../../redux/categoryActionThunk";
+import {categoryActions} from "../../redux/slice/categorySlice";
+import {fetchCategories} from "../../redux/thunk/categoryActionThunk";
 
 
 const CategoryList = () => {

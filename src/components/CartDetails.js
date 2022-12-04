@@ -1,19 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Badge, Button, Container,Table} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {cartActions} from "../redux/cartSlice";
-import alertify from "alertifyjs";
+import {fetchCart, removeFromCart} from "../redux/thunk/cartActionThunk";
 
 const CartDetails = () => {
 
     const cart = useSelector(state => (state.cartStore.cart))
     const dispatch = useDispatch();
 
-    const handleRemoveFromCart = (product) => {
-        dispatch(cartActions.removeFromCart(product.id))
-        alertify.error(product.productName + " removed from the cart",1)
-
+    const handleRemoveFromCart = (cartItem) => {
+        dispatch(removeFromCart(cartItem))
     }
+
+    useEffect(()=>fetchCart(),[])
 
     return (
         <div>
@@ -31,16 +30,21 @@ const CartDetails = () => {
                 </tr>
                 </thead>
                 <tbody align="center">
-                {cart.cartItemList.map((cartItem) =>
-                    <tr key={cartItem.product.id}>
-                        <th scope="row">{cartItem.product.id}</th>
-                        <td>{cartItem.totalQuantity}</td>
-                        <td>{cartItem.product.quantityPerUnit}</td>
-                        <td>{cartItem.product.unitPrice}</td>
-                        <td>{cartItem.totalPrice}</td>
-                        <td><Button color="danger" onClick={() => handleRemoveFromCart(cartItem.product)}>-</Button>
-                        </td>
-                    </tr>
+                {
+
+                    cart.cartItems.map((cartItem) =>{
+                    return    cartItem &&
+                        <tr key={cartItem.product.id}>
+                            <th scope="row">{cartItem.product.id}</th>
+                            <td>{cartItem.totalQuantity}</td>
+                            <td>{cartItem.product.quantityPerUnit}</td>
+                            <td>{cartItem.product.unitPrice}</td>
+                            <td>{cartItem.totalPrice}</td>
+                            <td><Button color="danger" onClick={() => handleRemoveFromCart(cartItem)}>-</Button>
+                            </td>
+                        </tr>
+                    }
+
                 )}
 
                 </tbody>

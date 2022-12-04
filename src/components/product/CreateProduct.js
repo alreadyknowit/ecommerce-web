@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, FormGroup,Input, Label} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {addProduct} from "../../redux/productActionsThunk";
-import {fetchCategories } from "../../redux/categoryActionThunk";
+import {addProduct} from "../../redux/thunk/productActionsThunk";
+import {fetchCategories } from "../../redux/thunk/categoryActionThunk";
 
 const CreateProduct = () => {
     const dispatch = useDispatch()

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchOneProduct, updateProduct} from "../../redux/productActionsThunk";
-import {fetchCategories, fetchOneCategory} from "../../redux/categoryActionThunk";
+import {fetchOneProduct, updateProduct} from "../../redux/thunk/productActionsThunk";
+import {fetchCategories, fetchOneCategory} from "../../redux/thunk/categoryActionThunk";
 import {useParams} from "react-router-dom";
 import {PageSpinner, ButtonSpinner} from "../spinner/Spinner";
 const UpdateProduct = () => {

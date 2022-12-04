@@ -1,10 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
-import categorySlice from "./categorySlice";
-import categoryListSlice from "./categoryListSlice";
-import productListSlice from "./productListSlice";
-import cartSlice from "./cartSlice";
-import prodcutSlice from "./prodcutSlice";
-import uiSlice from "./uiSlice";
+import categorySlice from "./slice/categorySlice";
+import categoryListSlice from "./slice/categoryListSlice";
+import productListSlice from "./slice/productListSlice";
+import cartSlice from "./slice/cartSlice";
+import prodcutSlice from "./slice/prodcutSlice";
+import uiSlice from "./slice/uiSlice";
 
 
 const store = configureStore({

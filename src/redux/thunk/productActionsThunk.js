@@ -1,7 +1,7 @@
-import {productListActions} from "./productListSlice";
-import {productActions} from "./prodcutSlice";
-import {API_URL} from "../const/url";
-import {uiActions} from "./uiSlice";
+import {productListActions} from "../slice/productListSlice";
+import {productActions} from "../slice/prodcutSlice";
+import {API_URL} from "../../const/url";
+import {uiActions} from "../slice/uiSlice";
 import alertify from "alertifyjs";
 
 export const fetchProducts = (categoryId) => {
@@ -66,7 +66,6 @@ export const addProduct = (product) => {
             dispatch(uiActions.setError(err))
             dispatch(uiActions.setIsLoading(false))
             alertify.error(err.message)
-
         })
     }
 }

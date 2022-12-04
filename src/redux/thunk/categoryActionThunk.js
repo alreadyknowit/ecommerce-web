@@ -1,6 +1,6 @@
-import {categoryListActions} from "./categoryListSlice";
-import {categoryActions} from "./categorySlice";
-import {API_URL} from "../const/url";
+import {categoryListActions} from "../slice/categoryListSlice";
+import {categoryActions} from "../slice/categorySlice";
+import {API_URL} from "../../const/url";
 
 export const fetchCategories = () => {
     return (dispatch) => {

@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Badge, Button, Table} from "reactstrap";
-import {cartActions} from "../../redux/cartSlice";
-import alertify from "alertifyjs"
 import {useNavigate} from "react-router-dom";
-import {fetchProducts} from "../../redux/productActionsThunk";
+import {fetchProducts} from "../../redux/thunk/productActionsThunk";
+import {addToCart} from "../../redux/thunk/cartActionThunk";
 
 const ProductList = () => {
 
@@ -17,8 +16,7 @@ const ProductList = () => {
     }, [dispatch, currentCategory])
 
     const handleAddingCart = (product) => {
-        dispatch(cartActions.addProduct(product))
-        alertify.success(product.productName + " added to the cart", 1)
+        dispatch(addToCart(product))
     }
 
     return (
