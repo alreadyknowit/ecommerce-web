@@ -10,6 +10,7 @@
     "alertifyjs": "^1.13.1",
     "bootstrap": "^5.2.2",
     "eslint": "8.22.0",
+    "mdb-react-ui-kit": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
