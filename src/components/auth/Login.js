@@ -1,52 +1,84 @@
-import React from 'react';
-import {
-    MDBContainer,
-    MDBInput,
-    MDBCheckbox,
-    MDBBtn,
-    MDBIcon
-}
-    from 'mdb-react-ui-kit';
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../../redux/thunk/authActionThunk";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-export const Login=()=> {
-    return (
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+export default function Login(){
+    const dispatch = useDispatch()
+    const [username, setUsername] = useState()
+    const [password, setPassword] =useState()
+    const navigate = useNavigate()
 
-            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+    const errors = useSelector(state => (state.uiStore.errors))
 
-            <div className="d-flex justify-content-between mx-3 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
+    const handleLogin = (e)=>{
+        e.preventDefault();
+
+       const user = {
+            username: username,
+            password:password
+        }
+        dispatch(login(user))
+        if(!errors)
+        navigate("/home",{replace:true})
+    }
+        return (
+
+            <div>
+                <form className="row d-flex col-md-6 justify-content-center" onSubmit={handleLogin}>
+                    <h3>Sign In</h3>
+                    <div className="mb-4">
+                        <label>Username</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Username"
+                            onChange={(e) => setUsername(e.target.value)}
+
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            onChange={(e) => setPassword(e.target.value)}
+
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <div className="custom-control custom-checkbox">
+                            <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                id="customCheck"
+                            />
+                            <label className="custom-control-label" htmlFor="customCheck">
+                                Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <p style={{color:"red"}}> {/*todo:design*/}
+                        {errors && errors.message}
+                    </p>
+                    <div className="d-grid">
+                        <button type="submit" className="btn btn-primary" >
+                            Login
+                        </button>
+                    </div>
+                    <span >
+                        <p  className="btn btn-link" onClick={()=>console.log('forgot password')}> Forgot password?</p>
+                    </span>
+                    <span >
+                        <p  className="btn btn-link" onClick={()=>navigate('/register')}>  Don't have an account? Register</p>
+                    </span>
+                </form>
+
+                <p>
+
+                </p>
             </div>
 
-            <MDBBtn className="mb-4">Sign in</MDBBtn>
-
-            <div className="text-center">
-                <p>Not a member? <a href="#!">Register</a></p>
-                <p>or sign up with:</p>
-
-                <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='facebook-f' size="sm"/>
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='twitter' size="sm"/>
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='google' size="sm"/>
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='github' size="sm"/>
-                    </MDBBtn>
-
-                </div>
-            </div>
-
-        </MDBContainer>
-    );
+        )
 }
-
